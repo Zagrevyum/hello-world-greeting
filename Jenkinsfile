@@ -1,5 +1,4 @@
-pipeline {
-  agent {
+
 node('master'){
  	scm checkout
 	stage('Build'){
@@ -31,4 +30,4 @@ node('master'){
  		server.upload(uploadSpec)
 }
 }
-  }}
+
