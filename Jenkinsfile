@@ -7,6 +7,10 @@ node('ubuntu-slave') {
  		sh 'mvn clean verify -DskipITs=true';
 			}
 		   }
+	stage('Unit Testing'){
+ 		junit '**/target/surefire-reports/TEST-*.xml'
+ 		archive 'target/*.jar'
+		}
 
 	stage('Static Code Analysis'){
 		withMaven(maven: 'M3') {
@@ -16,10 +20,7 @@ node('ubuntu-slave') {
 					}
 				}
 			}
-	stage('Unit Testing'){
- 		junit '**/target/surefire-reports/TEST-*.xml'
- 		archive 'target/*.jar'
-		}
+
 	stage ('Integration Test'){
 		withMaven(maven: 'M3') {
  			sh 'mvn clean verify -Dsurefire.skip=true';
@@ -33,7 +34,7 @@ node('ubuntu-slave') {
  			"files": [
  				{
  				"pattern": "target/hello-0.0.1.war",
- 				"target": "helloworld-greeting-project/${BUILD_NUMBER}/",
+ 				"target": "first-project/${BUILD_NUMBER}/",
  				"props": "Integration-Tested=Yes;Performance-Tested=No"
  }
  				]
