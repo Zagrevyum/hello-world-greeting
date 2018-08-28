@@ -1,4 +1,4 @@
-node('docker') {
+dockerNode(image: "maven:3.3.3-jdk-8"){
 	stage('Poll') {
  		scm checkout
 			}
