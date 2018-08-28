@@ -1,7 +1,7 @@
+pipeline {
+  agent {
 node('master'){
-	stage('Poll') {
- 		scm checkout
-			}
+ 	scm checkout
 	stage('Build'){
  		sh 'mvn clean verify -DskipITs=true';
 			}
@@ -31,3 +31,4 @@ node('master'){
  		server.upload(uploadSpec)
 }
 }
+  }}
