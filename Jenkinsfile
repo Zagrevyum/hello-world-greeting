@@ -1,5 +1,5 @@
 
-node('master'){
+node('ubuntu-slave'){
 
 	stage('Build'){
  		sh 'mvn clean verify -DskipITs=true';
