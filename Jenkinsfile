@@ -1,6 +1,6 @@
 
 node('master'){
- 	scm checkout
+
 	stage('Build'){
  		sh 'mvn clean verify -DskipITs=true';
 			}
