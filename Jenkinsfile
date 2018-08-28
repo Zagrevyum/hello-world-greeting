@@ -11,7 +11,8 @@ node('ubuntu-slave') {
 	stage('Static Code Analysis'){
 		withMaven(maven: 'M3') {
 			withSonarQubeEnv('SonarQube'){
- 				sh 'mvn clean verify sonar:sonar -Dsonar.projectName=evaluation-project -Dsonar.projectKey=evaluation-project-Dsonar.projectVersion=$BUILD_NUMBER';
+ 				sh 'mvn clean verify sonar:sonar -Dsonar.projectName=evaluation-project -Dsonar.login=$SONAR_UN -Dsonar.password=$SONAR_PW '
+				+' -Dsonar.projectKey=evaluation-project-Dsonar.projectVersion=$BUILD_NUMBER';
 					}
 				}
 			}
