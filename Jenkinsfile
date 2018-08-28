@@ -1,4 +1,4 @@
-node('ubuntu-slave'){
+node('master'){
 	stage('Poll') {
  		scm checkout
 			}
