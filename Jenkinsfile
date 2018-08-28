@@ -6,9 +6,7 @@ node('docker') {
  		sh 'mvn clean verify -DskipITs=true';
 			}
 	stage('Static Code Analysis'){
- 		sh 'mvn clean verify sonar:sonar -Dsonar.projectName=evaluation-project
-    -Dsonar.projectKey=evaluation-project
-    -Dsonar.projectVersion=$BUILD_NUMBER';
+ 		sh 'mvn clean verify sonar:sonar -Dsonar.projectName=evaluation-project -Dsonar.projectKey=evaluation-project -Dsonar.projectVersion=$BUILD_NUMBER';
 		}
 	stage('Unit Testing'){
  		junit '**/target/surefire-reports/TEST-*.xml'
