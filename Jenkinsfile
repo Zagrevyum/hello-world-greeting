@@ -1,4 +1,4 @@
-dockerNode(image: "maven:3.3.3-jdk-8"){
+Node("Ubuntu-Slave){
 	stage('Poll') {
  		scm checkout
 			}
