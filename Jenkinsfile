@@ -61,7 +61,7 @@ stash includes:
  }
 	
  stage ('Promote build in Artifactory'){
- withCredentials([usernameColonPassword(credentialsId:'artifactory-account', variable: 'credentials')]) {
+ withCredentials([usernameColonPassword(credentialsId:'artifactory', variable: 'credentials')]) {
  sh 'curl -u${credentials} -X PUT "http://192.168.100.49:8081/artifactory/api/storage/first-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=Performance-Tested=Yes"';
  }
  }
