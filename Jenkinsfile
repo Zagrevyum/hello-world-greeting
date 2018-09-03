@@ -23,7 +23,8 @@ node('ubuntu-slave') {
 	stage ('Integration Test'){
 		withMaven(maven: 'M3') {
  			sh 'mvn clean verify -Dsurefire.skip=true';
-			} 		junit '**/target/failsafe-reports/TEST-*.xml'
+			} 		
+		junit '**/target/failsafe-reports/TEST-*.xml'
  		archive 'target/*.jar'
 		}
 	stage ('Publish'){
