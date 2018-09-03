@@ -23,8 +23,7 @@ node('ubuntu-slave') {
 	stage ('Integration Test'){
 		withMaven(maven: 'M3') {
  			sh 'mvn clean verify -Dsurefire.skip=true';
-			}
- 		junit '**/target/failsafe-reports/TEST-*.xml'
+			} 		junit '**/target/failsafe-reports/TEST-*.xml'
  		archive 'target/*.jar'
 		}
 	stage ('Publish'){
@@ -39,5 +38,28 @@ node('ubuntu-slave') {
  				]
  					}"""
  		server.upload(uploadSpec)
+}
+	 stash includes:
+			'target/hello-0.0.1.war,src/pt/Hello_World_Test_Plan.jmx',
+ 	 		name: 'binary'
+
+ stage ('Start Tomcat'){
+ sh '''cd /home/sagrevyum/tomcat/bin
+ ./startup.sh''';
+ }
+ stage ('Deploy '){
+ unstash 'binary'
+ sh 'cp target/hello-0.0.1.war /home/sagrevyum/tomcat/webapps/';
+ }
+ stage ('Performance Testing'){
+ sh '''cd /opt/jmeter/bin/
+ ./jmeter.sh -n -t $WORKSPACE/src/pt/Hello_World_Test_Plan.jmx -l $WORKSPACE/test_report.jtl''';
+ step([$class: 'ArtifactArchiver', artifacts: '**/*.jtl'])
+ }
+ stage ('Promote build in Artifactory'){
+ withCredentials([usernameColonPassword(credentialsId:'artifactory-account', variable: 'credentials')]) {
+ sh 'curl -u${credentials} -X PUT "http://192.168.100.49:8081/artifactory/api/storage/first-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=PerformanceTested=Yes"';
+ }
+ }
 }
 }
