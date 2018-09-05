@@ -79,7 +79,7 @@ def downloadSpec = """{
 "props": "Performance-Tested=No;Integration-Tested=Yes"
 }
  ]
-}""
+}"""
 server.download(downloadSpec)
 }
 }
