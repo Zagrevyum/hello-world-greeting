@@ -66,8 +66,8 @@ stash includes:
  }
  }
 }
+
 node ('production') {
- 
 stage ('Deploy to Prod'){
 def server = Artifactory.server 'Default Artifactory'
 def downloadSpec = """{
@@ -82,5 +82,4 @@ def downloadSpec = """{
 }""
 server.download(downloadSpec)
 }
-
 }
