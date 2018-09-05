@@ -80,6 +80,7 @@ def downloadSpec = """{
 }
  ]
 }"""
-server.download(downloadSpec)
+def buildInfo1 = server.download(downloadSpec)
+server.publishBuildInfo buildInfo1
 }
 }
