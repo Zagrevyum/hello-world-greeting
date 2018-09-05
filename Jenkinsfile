@@ -74,7 +74,7 @@ def downloadSpec = """{
  "files": 
 [
  {
-"pattern": "example-project/$BUILD_NUMBER/*.zip",
+"pattern": "first-project/$BUILD_NUMBER/*.zip",
 "target": "/home/sagrevyum/tomcat/webapps/",
 "props": "Performance-Tested=No;Integration-Tested=Yes"
 }
