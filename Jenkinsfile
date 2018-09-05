@@ -74,8 +74,7 @@ node ('production') {
  {
  "pattern": "example-project/$BUILD_NUMBER/*.zip",
  "target": "/home/sagrevyum/tomcat/webapps/"
- "props": "Performance-Tested=No;
- Integration-Tested=Yes",
+ "props": "Performance-Tested=No;Integration-Tested=Yes",
  }
  ]
  }""
