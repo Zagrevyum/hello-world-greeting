@@ -66,18 +66,3 @@ stash includes:
  }
  }
 }
-node ('production') {
- stage ('Deploy to Prod'){
- def server = Artifactory.server 'Default Artifactory'
- def downloadSpec = """{
- "files": [
- {
- "pattern": "example-project/$BUILD_NUMBER/*.zip",
- "target": "/home/sagrevyum/tomcat/webapps/",
- "props": "Performance-Tested=No;Integration-Tested=Yes"
- }
- ]
- }""
- server.download(downloadSpec)
- }
-}
