@@ -65,6 +65,25 @@ stash includes:
  sh 'curl -u${credentials} -X PUT "http://192.168.100.49:8081/artifactory/api/storage/first-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=Performance-Tested=Yes"';
  }
  }
-	
+	node ('production') {
+ stage ('Deploy to Prod'){
+ def server = Artifactory.server 'Default Artifactory'
+ def downloadSpec = """{
+ "files": [
+ {
+ "pattern": "example-project/$BUILD_NUMBER/*.zip",
+ "target": "/home/sagrevyum/tomcat/webapps/"
+ "props": "Performance-Tested=No;
+ Integration-Tested=Yes",
+ }
+ ]
+ }""
+ server.download(downloadSpec)
+ }
 }
+
+
+
+
+
 
